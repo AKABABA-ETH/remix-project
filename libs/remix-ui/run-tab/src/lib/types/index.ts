@@ -82,7 +82,7 @@ export interface RunTabState {
       }[]
     },
     deployOptions: { [file: string]: { [name: string]: DeployOptions } },
-    loadType: 'abi' | 'sol' | 'other'
+    loadType: 'abi' | 'sol' | 'vyper' | 'lexon' | 'contract' | 'other'
     currentFile: string,
     compilationSource: string,
     currentContract: string,
@@ -171,6 +171,8 @@ export interface EnvironmentProps {
     error: string
   },
   setExecutionContext: (executionContext: { context: string }) => void
+  modal: (title: string, message: string | JSX.Element, okLabel: string, okFn: () => void, cancelLabel?: string, cancelFn?: () => void, okBtnClass?: string, cancelBtnClass?: string) => void,
+  config: any
 }
 
 export interface NetworkProps {
@@ -243,7 +245,7 @@ export interface ContractDropdownProps {
   contracts: {
     contractList: ContractList,
     deployOptions: { [file: string]: { [name: string]: DeployOptions } },
-    loadType: 'abi' | 'sol' | 'other',
+    loadType: 'abi' | 'sol' | 'vyper' | 'lexon' | 'contract' | 'other',
     currentFile: string,
     compilationSource: string
     currentContract: string,

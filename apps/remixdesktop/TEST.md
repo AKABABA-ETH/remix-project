@@ -1,4 +1,4 @@
-# How run and write tests for Remix Desktop
+# How to run and write tests for Remix Desktop
 
 
 ### Basic procedure of local testing
@@ -11,11 +11,11 @@
 
 Testing runs through nightwatch that treats an electron application as a special version of chrome, which it is. It basically calls the executable which is built by the ./rundist.bash script which creates executables based on the current channel configuration package.json, ie "version": "1.0.8-insiders"
 
-Executables are stored in the ./release directory. Without that executable you cannot run tests. You cannot call tests on local development instance that is launched by yarn start:dev. You need to create an exec first. 
+Executables are stored in the ./release directory. Without that executable you cannot run tests. You cannot call tests on local development instance that is launched by yarn start:dev. You need to create an executable file first. 
 
 This is done by running ./rundist.bash
 
-Normally when you would do a 'real' release you would package remix IDE into the distributable but for local e2e this not necessary because it will use the remix IDE that is being served.
+Normally when you would do a 'real' release you would package remix IDE into the distributable but for local e2e this is not  necessary because it will use the remix IDE that is being served.
 
 
 ```
@@ -35,11 +35,11 @@ Normally when you would do a 'real' release you would package remix IDE into the
 
 ### Local testing
 
-In order to facilitate local testing nightwatch will boot the executable with the --e2e-local flag when running locally ( so outside of CIRCLE CI ). This means the electron app with load the local running Remix IDE.
+In order to facilitate local testing nightwatch will boot the executable with the --e2e-local flag when running locally ( so outside of CIRCLE CI ). This means the electron app will load the local running Remix IDE.
 
 So to start testing locally 
 - run the IDE with 'yarn serve' as you would normally do.
-- build your release. You will always need to this when the Desktop app itself changes its code. 
+- build your release. You will always need to do this when the Desktop app itself changes its code. 
     - ./rundist.bash
 - in apps/remixdesktop: 
     - yarn build:e2e
@@ -107,7 +107,7 @@ module.exports = {
 
 Always use this, it avoids trouble: 
 ```
-rowser.hideToolTips()
+browser.hideToolTips()
 ```
 
 

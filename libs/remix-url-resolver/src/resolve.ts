@@ -105,8 +105,8 @@ export class RemixURLResolver {
     // eslint-disable-next-line no-useless-catch
     try {
       const bzz = new Bzz({ url: this.protocol + '//swarm-gateways.net' })
-      const url = bzz.getDownloadURL(cleanUrl, { mode: 'raw' })
-      const response: AxiosResponse = await axios.get(url, { transformResponse: []})
+      const swarmUrl = bzz.getDownloadURL(cleanUrl, { mode: 'raw' }) // variable name changed
+      const response: AxiosResponse = await axios.get(swarmUrl, { transformResponse: []})
       return { content: response.data, cleanUrl }
     } catch (e) {
       throw e
@@ -174,6 +174,12 @@ export class RemixURLResolver {
               version = deps[pkg]
             }
             if (version) {
+              // If the entry is pointing to a github repo, redirect to correct handler instead of continuing
+              if (version.startsWith("github:")) {
+                const [, repo, tag] = version.match(/github:([^#]+)#(.+)/);
+                const filePath = url.replace(/^[^/]+\//, '');
+                return this.handleGithubCall(repo, `blob/${tag}/${filePath}`);
+              }
               const versionSemver = semver.minVersion(version)
               fetchUrl = url.replace(pkg, `${pkg}@${versionSemver.version}`)
             }

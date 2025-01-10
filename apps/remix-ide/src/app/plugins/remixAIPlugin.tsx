@@ -24,7 +24,7 @@ const profile = {
   description: 'RemixAI provides AI services to Remix IDE.',
   kind: '',
   location: 'popupPanel',
-  documentation: 'https://remix-ide.readthedocs.io/en/latest/remixai.html',
+  documentation: 'https://remix-ide.readthedocs.io/en/latest/ai.html',
   version: packageJson.version,
   maintainedBy: 'Remix'
 }
@@ -45,7 +45,7 @@ export class RemixAIPlugin extends ViewPlugin {
     super(profile)
     this.isOnDesktop = inDesktop
     this.agent = new CodeExplainAgent(this)
-    // user machine dont use ressource for remote inferencing
+    // user machine dont use resource for remote inferencing
   }
 
   onActivation(): void {
@@ -235,8 +235,6 @@ export class RemixAIPlugin extends ViewPlugin {
       data-id='aichat-view'
       style={{
         minHeight: 'max-content',
-        maxWidth: '25rem',
-        width: '24rem',
       }}
     >
       <PluginViewWrapper plugin={this} />

@@ -201,7 +201,7 @@ export const commit = async (message: string = "") => {
 
     sendToGitLog({
       type: 'success',
-      message: `Commited: ${sha}`
+      message: `Committed: ${sha}`
     })
 
   } catch (err) {
@@ -253,7 +253,7 @@ export const add = async (filepath: addInputType) => {
 
 }
 
-const getLastCommmit = async () => {
+const getLastCommit = async () => {
   try {
     let currentcommitoid = "";
     currentcommitoid = await getCommitFromRef("HEAD");
@@ -275,7 +275,7 @@ export const rm = async (args: rmInputType) => {
 }
 
 export const checkoutfile = async (filename: string) => {
-  const oid = await getLastCommmit();
+  const oid = await getLastCommit();
   if (oid)
     try {
       const commitOid = await plugin.call('dgitApi', 'resolveref', {
@@ -444,7 +444,7 @@ const parseError = async (e: any) => {
       type: ModalTypes.alert
     })
   } else {
-    await sendToMatomo(gitMatomoEventTypes.ERROR, ['UKNOWN'])
+    await sendToMatomo(gitMatomoEventTypes.ERROR, ['UNKNOWN'])
     await plugin.call('notification', 'alert' as any, {
       title: 'Error',
       message: e.message
@@ -577,7 +577,7 @@ export const saveGitHubCredentials = async (credentials: { username: string, ema
         await plugin.call('notification', 'alert', {
           title: 'Error',
           id: 'github-credentials-error',
-          message: `Could not retreive the user from GitHub. You can continue to use the app, but you will not be able to push or pull.`
+          message: `Could not retrieve the user from GitHub. You can continue to use the app, but you will not be able to push or pull.`
         })
       }
       dispatch(setGitHubUser({
